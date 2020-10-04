@@ -35,7 +35,11 @@ export const App = () => {
     else if(loaded && data.current.temp <=17){
       setTemperature(false)
     }
-  },)  
+  },)
+  
+  const dt = 1490028077
+
+  const myDate = dt.toString()
 
 
   return (
@@ -47,8 +51,9 @@ export const App = () => {
       <p>Min: {Math.round(data.daily[0].temp.min)}°C </p>
       <p>Max: {Math.round(data.daily[0].temp.max)}°C </p>
       {/* <p>Weather: {data.current.weather[0].description} </p> */}
+      
       {data.daily.slice(0, -3).map(day => (
-        <p key={day.dt}><img src={'http://openweathermap.org/img/w/' + day.weather[0].icon + '.png'} alt="#" />{Math.round(day.temp.day)}°C </p>
+        <p key={day.dt}>{/* {(day.dt*1000)} */}<img src={'http://openweathermap.org/img/w/' + day.weather[0].icon + '.png'} alt="#" />{Math.round(day.temp.day)}°C </p>
         ))}
     </div> : <div>not loaded yet</div> }
     </div>
