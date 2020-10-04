@@ -22,15 +22,16 @@ code {
   align-items: center;
   padding:2rem;
   width:100%;
-  height:100%;
+  height:100vh;
   font-size: 2rem;
 }
 
 .wrapper.cold {
   background: linear-gradient(to right, #bbd2c5, #536976, #292e49);
+  
 }
-  .wrapper.hot {
-    background: linear-gradient(to right, #22c1c3, #fdbb2d);
+.wrapper.hot {
+  background: linear-gradient(to right, #22c1c3, #fdbb2d);
 }
 
 .current {
