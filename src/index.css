@@ -25,7 +25,16 @@ code {
   font-size: 2rem;
 }
 
+.wrapper.cold {
+  background-color: rgb(71, 141, 255);
+}
+
+.wrapper.hot {
+  background-color: rgb(255, 114, 71);
+}
+
 .current {
+  background-color: white;
   width:12em;
   text-align: center;
   border:1px solid rgba(0, 0, 0, .05);

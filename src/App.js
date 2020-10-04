@@ -8,9 +8,10 @@ export const App = () => {
 
   const url = endpoint + API_KEY
 
- 
+  //setting state here
   const[loaded, setLoaded] = useState(false)
   const[data, setData] = useState({})
+  const[temperature, setTemperature] = useState(false)
 
   //api.openweathermap.org/data/2.5/forecast?q={city name}&appid={API key}
   //api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}
@@ -26,9 +27,19 @@ export const App = () => {
   })
   },[url])  
 
+  useEffect(()=>{
+
+    if(loaded && data.current.temp >= 18)
+      //console.log('loaded')
+      setTemperature(true)
+    else if(loaded && data.current.temp <=17){
+      setTemperature(false)
+    }
+  },)  
+
 
   return (
-    <div className="wrapper">
+    <div className={`wrapper ${temperature ? "hot" : "cold"}`}>
       
       {loaded ? <div className="current"><p>Stockholm: </p>
       <p>{Math.round(data.current.temp)}°C  <img src={'http://openweathermap.org/img/w/' + data.current.weather[0].icon + '.png'} alt="#" /></p>
@@ -39,8 +50,7 @@ export const App = () => {
       {data.daily.slice(0, -3).map(day => (
         <p key={day.dt}><img src={'http://openweathermap.org/img/w/' + day.weather[0].icon + '.png'} alt="#" />{Math.round(day.temp.day)}°C </p>
         ))}
-  </div> : <div>not loaded yet</div> }
-  
+    </div> : <div>not loaded yet</div> }
     </div>
   )
 }
