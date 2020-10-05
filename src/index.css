@@ -27,6 +27,7 @@ code {
 }
 
 .wrapper.cold {
+  
   background: linear-gradient(to right, #bbd2c5, #536976, #292e49);
   
 }
@@ -46,9 +47,32 @@ code {
 
 .current p {
   margin-bottom: .5em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.current-w {
+  font-size: 1.6rem;
+}
+
+.title {
+  color:white;
 }
 
 p img {
   border:1px solid rgba(0, 0, 0, .08);
+  width:18%;
   border-radius: 6px;
+  margin:.5rem;
+}
+
+.forecast {
+  display: flex;
+  font-size: 1rem;
+  border:1px solid rgba(0, 0, 0, .08);
+  border-radius: 5px;;
+  padding:.5rem;
+  align-items: center;
+  justify-content: space-evenly;
 }

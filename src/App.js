@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react'
+import moment from 'moment'
 
 export const App = () => {
 
@@ -45,15 +46,15 @@ export const App = () => {
   return (
     <div className={`wrapper ${temperature ? "hot" : "cold"}`}>
       
-      {loaded ? <div className="current"><p>Stockholm: </p>
-      <p>{Math.round(data.current.temp)}°C  <img src={'http://openweathermap.org/img/w/' + data.current.weather[0].icon + '.png'} alt="#" /></p>
-      <p>Feels like: {Math.round(data.current.feels_like)}°C </p>
-      <p>Min: {Math.round(data.daily[0].temp.min)}°C </p>
-      <p>Max: {Math.round(data.daily[0].temp.max)}°C </p>
+      {loaded ? <div className="current"><p className="title">Stockholm: </p>
+      <p className="current-w">{Math.round(data.current.temp)}°C  <img src={'http://openweathermap.org/img/w/' + data.current.weather[0].icon + '.png'} alt="#" /></p>
+      <p className="current-w">Feels like: {Math.round(data.current.feels_like)}°C </p>
+      <p className="current-w">Min: {Math.round(data.daily[0].temp.min)}°C </p>
+      <p className="current-w">Max: {Math.round(data.daily[0].temp.max)}°C </p>
       {/* <p>Weather: {data.current.weather[0].description} </p> */}
       
-      {data.daily.slice(0, -3).map(day => (
-        <p key={day.dt}>{/* {(day.dt*1000)} */}<img src={'http://openweathermap.org/img/w/' + day.weather[0].icon + '.png'} alt="#" />{Math.round(day.temp.day)}°C </p>
+      {data.daily.slice(1, -2).map(day => (
+        <p className="forecast" key={day.dt}>{moment(day.dt*1000).format('dddd')/* {(day.dt*1000)} */}<img src={'http://openweathermap.org/img/w/' + day.weather[0].icon + '.png'} alt="#" />{Math.round(day.temp.day)}°C </p>
         ))}
     </div> : <div>not loaded yet</div> }
     </div>
