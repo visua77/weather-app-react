@@ -54,7 +54,7 @@ export const App = () => {
       {/* <p>Weather: {data.current.weather[0].description} </p> */}
       
       {data.daily.slice(1, -2).map(day => (
-        <p className="forecast" key={day.dt}>{moment(day.dt*1000).format('dddd')/* {(day.dt*1000)} */}<img src={'http://openweathermap.org/img/w/' + day.weather[0].icon + '.png'} alt="#" />{Math.round(day.temp.day)}°C </p>
+        <p className="forecast" key={day.dt}>{moment(day.dt*1000).format('dddd')/* {(day.dt*1000)} */}<img src={'http://openweathermap.org/img/wn/' + day.weather[0].icon + '.png'} alt="#" />{Math.round(day.temp.day)}°C </p>
         ))}
     </div> : <div>not loaded yet</div> }
     </div>
