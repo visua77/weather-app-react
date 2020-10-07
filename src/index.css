@@ -27,7 +27,6 @@ code {
 }
 
 .wrapper.cold {
-  
   background: linear-gradient(to right, #bbd2c5, #536976, #292e49);
   
 }
@@ -46,7 +45,7 @@ code {
 }
 
 .current p {
-  margin-bottom: .5em;
+  
   display: flex;
   align-items: center;
   justify-content: center;

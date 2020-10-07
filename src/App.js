@@ -27,8 +27,7 @@ useEffect(()=>{
     setData(json)
     setLoaded(true)
   })
-  console.log('effect ran')
-  console.log(data)
+
   },[url,endpoint])  
 
   
