@@ -3,8 +3,9 @@ import moment from 'moment'
 
 export const App = () => {
 
+  const[location, setLocation] = useState('Stockholm')
+  const[endpoint, setEndpoint] = useState('https://api.openweathermap.org/data/2.5/onecall?lat=59.334591&lon=18.063240&units=metric&appid=')
 
-  const endpoint = 'https://api.openweathermap.org/data/2.5/onecall?lat=59.334591&lon=18.063240&units=metric&appid='
   const API_KEY = '0873dd387b81dc473ae107f675063248'
 
   const url = endpoint + API_KEY
@@ -18,7 +19,7 @@ export const App = () => {
   //api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}
   //api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&exclude={part}&appid={API key}
 
-  useEffect(()=>{
+useEffect(()=>{
 
   fetch(url)
   .then(res => res.json())
@@ -26,9 +27,12 @@ export const App = () => {
     setData(json)
     setLoaded(true)
   })
-  },[url])  
+  console.log('effect ran')
+  console.log(data)
+  },[url,endpoint])  
 
-  useEffect(()=>{
+  
+useEffect(()=>{
 
     if(loaded && data.current.temp >= 18)
       //console.log('loaded')
@@ -37,16 +41,41 @@ export const App = () => {
       setTemperature(false)
     }
   },)
+
+
+useEffect(()=> {
+
+    if(loaded && location === 'Stockholm'){
+      setEndpoint('https://api.openweathermap.org/data/2.5/onecall?lat=59.334591&lon=18.063240&units=metric&appid=')
+    }
+    if(loaded && location==='Schaprode'){
+      setEndpoint('https://api.openweathermap.org/data/2.5/onecall?lat=54.5167&lon=13.1667&units=metric&appid=')
+    }
+    if(loaded && location==='Sóller'){
+      setEndpoint('https://api.openweathermap.org/data/2.5/onecall?lat=39.76623&lon=2.71521&units=metric&appid=')
+    }
+    console.log(endpoint)
+    },[location])
+
+  const handleChange = (e) => {
+    const val = e.target.value
+      setLocation(val)
+    }
   
-  const dt = 1490028077
-
-  const myDate = dt.toString()
-
-
-  return (
+  
+return (
     <div className={`wrapper ${temperature ? "hot" : "cold"}`}>
       
-      {loaded ? <div className="current"><p className="title">Stockholm: </p>
+      {loaded ? <div className="current"><p className="title">{location}: </p>
+
+      <p>
+      <select onChange={(e)=> {handleChange(e)}}>
+
+      <option value={'Stockholm'}>Stockholm</option>
+      <option value={'Schaprode'}>Schaprode</option>
+      <option value={'Sóller'}>Sóller</option>
+      </select></p>
+
       <p className="current-w">{Math.round(data.current.temp)}°C  <img src={'http://openweathermap.org/img/w/' + data.current.weather[0].icon + '.png'} alt="#" /></p>
       <p className="current-w">Feels like: {Math.round(data.current.feels_like)}°C </p>
       <p className="current-w">Min: {Math.round(data.daily[0].temp.min)}°C </p>
